@@ -1,0 +1,39 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="VirtualFlightOnlineTransmitter.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="servers" Type="System.String" Scope="User">
+      <Value Profile="(Default)">[{"serverName":"VirtualFlight.Online","callsign":"Callsign","pilotName":"Pilot Name","groupName":"VirtualFlight.Online","notes":"","msfsServer":"WEST EUROPE","autoConnect":"true","serverURL":"https://transmitter.virtualflight.online/transmit","pin":"1234"}]</Value>
+    </Setting>
+    <Setting Name="serverName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Your Server Name</Value>
+    </Setting>
+    <Setting Name="callsign" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Your Callsign</Value>
+    </Setting>
+    <Setting Name="pilotName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Your Pilot Name</Value>
+    </Setting>
+    <Setting Name="groupName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Your Group Name</Value>
+    </Setting>
+    <Setting Name="notes" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="msfsServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">WEST EUROPE</Value>
+    </Setting>
+    <Setting Name="autoConnect" Type="System.String" Scope="User">
+      <Value Profile="(Default)">true</Value>
+    </Setting>
+    <Setting Name="serverURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://transmitter.virtualflight.online/transmit.php</Value>
+    </Setting>
+    <Setting Name="pin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1234</Value>
+    </Setting>
+    <Setting Name="selectedServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
