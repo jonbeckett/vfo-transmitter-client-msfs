@@ -2,10 +2,14 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Transmitter"
-#define MyAppVersion "1.0.2.23"
+#define MyAppVersion "1.0.3.0"
 #define MyAppPublisher "Jonathan Beckett"
 #define MyAppURL "https://virtualflight.online"
 #define MyAppExeName "Transmitter.exe"
+
+; Build output (repo-relative)
+#define BuildOutputDir "..\bin\Release"
+#define SetupIconPath "..\virtualflightonline128x128.ico"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -23,9 +27,9 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=commandline
-OutputDir=c:\Projects\virtualflightonlinetransmitter\installer
+OutputDir={#SourcePath}
 OutputBaseFilename=transmitter_installer
-SetupIconFile=c:\Projects\virtualflightonlinetransmitter\client\virtualflightonline128x128.ico
+SetupIconFile={#SetupIconPath}
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -39,69 +43,17 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Text.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Text.Json.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Threading.Channels.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Threading.Channels.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Threading.Tasks.Extensions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Threading.Tasks.Extensions.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.ValueTuple.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Transmitter.application"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Transmitter.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Transmitter.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Transmitter.exe.manifest"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Transmitter.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\CTrue.FsConnect.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\CTrue.FsConnect.Managers.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\CTrue.FsConnect.Managers.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\CTrue.FsConnect.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Bcl.AsyncInterfaces.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Bcl.AsyncInterfaces.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Configuration.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Configuration.Abstractions.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Configuration.Binder.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Configuration.Binder.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Configuration.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Configuration.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.DependencyInjection.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.DependencyInjection.Abstractions.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.DependencyInjection.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.DependencyInjection.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Logging.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Logging.Abstractions.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Logging.Configuration.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Logging.Configuration.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Logging.Console.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Logging.Console.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Logging.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Logging.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Options.ConfigurationExtensions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Options.ConfigurationExtensions.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Options.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Options.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Primitives.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.Extensions.Primitives.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.FlightSimulator.SimConnect.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Microsoft.SyndicationFeed.ReaderWriter.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Newtonsoft.Json.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Serilog.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\Serilog.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\SimConnect.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Buffers.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Buffers.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Diagnostics.DiagnosticSource.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Diagnostics.DiagnosticSource.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.IO.Pipelines.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.IO.Pipelines.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Memory.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Memory.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Numerics.Vectors.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Numerics.Vectors.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Runtime.CompilerServices.Unsafe.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Runtime.CompilerServices.Unsafe.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Text.Encodings.Web.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\vfo-transmitter-client-msfs\client\bin\Release\System.Text.Encodings.Web.xml"; DestDir: "{app}"; Flags: ignoreversion
+
+; Runtime-only payload: the app + its runtime DLLs.
+; Excludes dev artifacts (PDB) and documentation files (XML), plus ClickOnce files.
+Source: "{#BuildOutputDir}\Transmitter.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildOutputDir}\Transmitter.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#BuildOutputDir}\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+
+; Optional external manifest (some builds may not produce this file)
+#ifexist "{#BuildOutputDir}\Transmitter.exe.manifest"
+Source: "{#BuildOutputDir}\Transmitter.exe.manifest"; DestDir: "{app}"; Flags: ignoreversion
+#endif
 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
