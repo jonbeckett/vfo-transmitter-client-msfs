@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -93,7 +93,6 @@ namespace VirtualFlightOnlineTransmitter
             this.ssMain = new System.Windows.Forms.StatusStrip();
             this.tsslMain = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslSimulatorStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tsslTransponderCode = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslCommunicationsStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.tmrConnect = new System.Windows.Forms.Timer(this.components);
             this.btnDisconnect = new System.Windows.Forms.Button();
@@ -617,7 +616,6 @@ namespace VirtualFlightOnlineTransmitter
             this.ssMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsslMain,
             this.tsslSimulatorStatus,
-            this.tsslTransponderCode,
             this.tsslCommunicationsStatus});
             this.ssMain.Location = new System.Drawing.Point(0, 263);
             this.ssMain.Name = "ssMain";
@@ -638,11 +636,6 @@ namespace VirtualFlightOnlineTransmitter
             this.tsslSimulatorStatus.Size = new System.Drawing.Size(16, 17);
             this.tsslSimulatorStatus.Text = "...";
             // 
-            // tsslTransponderCode
-            // 
-            this.tsslTransponderCode.Name = "tsslTransponderCode";
-            this.tsslTransponderCode.Size = new System.Drawing.Size(16, 17);
-            this.tsslTransponderCode.Text = "XPDR: ---";
             // 
             // tsslCommunicationsStatus
             // 
@@ -774,7 +767,6 @@ namespace VirtualFlightOnlineTransmitter
         private ToolStripSeparator toolStripMenuItem1;
         private ToolStripMenuItem websiteToolStripMenuItem;
         private ToolStripStatusLabel tsslSimulatorStatus;
-        private ToolStripStatusLabel tsslTransponderCode;
         private ToolStripStatusLabel tsslCommunicationsStatus;
         private ToolStripSeparator toolStripMenuItem3;
         private ToolStripMenuItem whosOnlineToolStripMenuItem;

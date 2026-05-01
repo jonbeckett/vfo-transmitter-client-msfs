@@ -221,8 +221,7 @@ namespace VirtualFlightOnlineTransmitter
             this.tbGroundspeed.Text       = string.Format("{0:0. knots}", data.Groundspeed);
             this.tbTouchdownVelocity.Text = string.Format("{0:0. ft/min}", data.TouchdownVelocity * 60);
 
-            this.tsslSimulatorStatus.Text = "LON : " + this.tbLongitude.Text + " - LAT : " + this.tbLatitude.Text + " - ALT : " + this.tbAltitude.Text + " - HDG : " + this.tbHeading.Text + " - GS : " + this.tbGroundspeed.Text;
-            this.tsslTransponderCode.Text = "XPDR: " + data.TransponderCode;
+            this.tsslSimulatorStatus.Text = "LON : " + this.tbLongitude.Text + " - LAT : " + this.tbLatitude.Text + " - ALT : " + this.tbAltitude.Text + " - HDG : " + this.tbHeading.Text + " - GS : " + this.tbGroundspeed.Text + " - XPDR: " + data.TransponderCode;
 
             // Skip transmission if one is already in flight to avoid overlapping requests
             if (_isTransmitting) return;
