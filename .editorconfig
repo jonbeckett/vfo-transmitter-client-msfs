@@ -1,0 +1,105 @@
+root = true
+
+[*.cs]
+# -----------------------------------------------------------------------
+# Core formatting
+# -----------------------------------------------------------------------
+indent_style             = space
+indent_size              = 4
+end_of_line              = crlf
+charset                  = utf-8
+trim_trailing_whitespace = true
+insert_final_newline     = true
+
+# -----------------------------------------------------------------------
+# .NET naming conventions
+# -----------------------------------------------------------------------
+dotnet_naming_rule.private_fields_underscore.symbols   = private_fields
+dotnet_naming_rule.private_fields_underscore.style     = underscore_camel
+dotnet_naming_rule.private_fields_underscore.severity  = warning
+
+dotnet_naming_symbols.private_fields.applicable_kinds            = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities  = private
+
+dotnet_naming_style.underscore_camel.capitalization  = camel_case
+dotnet_naming_style.underscore_camel.required_prefix = _
+
+# -----------------------------------------------------------------------
+# Microsoft .NET Analyzer (CA) rules
+# -----------------------------------------------------------------------
+
+# Prefer HttpClient singleton — already done
+dotnet_diagnostic.CA2000.severity = warning   # Dispose objects before scope lost
+
+# Reliability
+dotnet_diagnostic.CA2007.severity = none      # ConfigureAwait — not needed in WinForms (always UI thread)
+dotnet_diagnostic.CA1031.severity = warning   # Do not catch general exception types
+
+# Naming
+dotnet_diagnostic.CA1707.severity = warning   # Identifiers should not contain underscores (parameters/locals)
+dotnet_diagnostic.CA1708.severity = warning   # Identifiers should differ by more than case
+
+# Design
+dotnet_diagnostic.CA1051.severity = warning   # Do not declare visible instance fields
+dotnet_diagnostic.CA1822.severity = warning   # Mark members as static where possible
+
+# Performance
+dotnet_diagnostic.CA1805.severity = warning   # Do not initialise unnecessarily to default
+
+# -----------------------------------------------------------------------
+# StyleCop rules
+# -----------------------------------------------------------------------
+
+# --- Suppress noisy rules unsuitable for a small WinForms app ---
+
+# File header not required
+dotnet_diagnostic.SA1633.severity = none
+
+# XML documentation on every member not required
+dotnet_diagnostic.SA1600.severity = none
+dotnet_diagnostic.SA1601.severity = none
+dotnet_diagnostic.SA1602.severity = none
+dotnet_diagnostic.SA1604.severity = none
+dotnet_diagnostic.SA1605.severity = none
+dotnet_diagnostic.SA1606.severity = none
+dotnet_diagnostic.SA1607.severity = none
+dotnet_diagnostic.SA1608.severity = none
+dotnet_diagnostic.SA1611.severity = none
+dotnet_diagnostic.SA1615.severity = none
+dotnet_diagnostic.SA1616.severity = none
+dotnet_diagnostic.SA1618.severity = none
+dotnet_diagnostic.SA1619.severity = none
+dotnet_diagnostic.SA1623.severity = none
+dotnet_diagnostic.SA1625.severity = none
+dotnet_diagnostic.SA1629.severity = none
+
+# Allow using directives outside namespace (project convention)
+dotnet_diagnostic.SA1200.severity = none
+
+# Private fields prefixed with _ is the established project convention
+dotnet_diagnostic.SA1309.severity = none
+
+# XML documentation generation is not configured for this project
+dotnet_diagnostic.SA0001.severity = none
+
+# Allow top-level statements ordering flexibility
+dotnet_diagnostic.SA1201.severity = none
+dotnet_diagnostic.SA1202.severity = none
+
+# --- Keep these active ---
+
+# Bracing
+dotnet_diagnostic.SA1500.severity = warning   # Braces for multi-line statements
+dotnet_diagnostic.SA1503.severity = warning   # Braces should not be omitted
+
+# Spacing
+dotnet_diagnostic.SA1000.severity = warning   # Keywords should be followed by a space
+dotnet_diagnostic.SA1001.severity = warning   # Commas should be followed by a space
+dotnet_diagnostic.SA1003.severity = warning   # Symbols should be spaced correctly
+dotnet_diagnostic.SA1008.severity = warning   # Opening parenthesis should not be preceded by a space
+dotnet_diagnostic.SA1009.severity = warning   # Closing parenthesis should be followed by a space
+
+# Readability
+dotnet_diagnostic.SA1101.severity = none      # Prefix local calls with 'this.' — project style omits it
+dotnet_diagnostic.SA1116.severity = warning   # Split parameters should start on the line after the declaration
+dotnet_diagnostic.SA1117.severity = warning   # Parameters should be on the same line or separate lines
