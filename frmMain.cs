@@ -75,7 +75,19 @@ namespace VirtualFlightOnlineTransmitter
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == SimConnectClient.WM_USER_SIMCONNECT)
-                _simConnectClient.HandleWindowMessage();
+            {
+                try
+                {
+                    _simConnectClient.HandleWindowMessage();
+                }
+                catch
+                {
+                    // If SimConnect throws (for example the simulator exited or the
+                    // connection was lost) ensure we disconnect and update the UI
+                    // rather than allowing an unhandled exception to crash the app.
+                    try { Disconnect("Cannot connect to simulator"); } catch { }
+                }
+            }
 
             base.WndProc(ref m);
         }
@@ -211,32 +223,55 @@ namespace VirtualFlightOnlineTransmitter
         /// </summary>
         private async void HandleDataReceived(object sender, PlaneData data)
         {
-            // Update the screen immediately on every tick
-            this.tbAircraftType.Text      = data.AircraftType;
-            this.tbLatitude.Text          = LatitudeToString(data.Latitude);
-            this.tbLongitude.Text         = LongitudeToString(data.Longitude);
-            this.tbAltitude.Text          = string.Format("{0:0. ft}", data.Altitude);
-            this.tbHeading.Text           = string.Format("{0:0. deg}", data.Heading);
-            this.tbAirspeed.Text          = string.Format("{0:0. knots}", data.Airspeed);
-            this.tbGroundspeed.Text       = string.Format("{0:0. knots}", data.Groundspeed);
-            this.tbTouchdownVelocity.Text = string.Format("{0:0. ft/min}", data.TouchdownVelocity * 60);
-
-            this.tsslSimulatorStatus.Text = "LON : " + this.tbLongitude.Text + " - LAT : " + this.tbLatitude.Text + " - ALT : " + this.tbAltitude.Text + " - HDG : " + this.tbHeading.Text + " - GS : " + this.tbGroundspeed.Text + " - XPDR: " + data.TransponderCode;
-
-            // Skip transmission if one is already in flight to avoid overlapping requests
-            if (_isTransmitting) return;
-
-            _isTransmitting = true;
-            tsslCommunicationsStatus.Text = "Sending...";
             try
             {
-                string status = await _httpTransmitter.TransmitAsync(data, tbNotes.Text, Application.ProductVersion);
-                tsslCommunicationsStatus.Text = status;
-                tsslMain.Text = DateTime.Now.Subtract(ConnectionStartTime).ToString(@"hh\:mm\:ss");
+                // Update the screen immediately on every tick. Guard against null `data`.
+                if (data == null)
+                {
+                    tsslSimulatorStatus.Text = "No data";
+                    return;
+                }
+
+                this.tbAircraftType.Text      = data.AircraftType ?? string.Empty;
+                this.tbLatitude.Text          = LatitudeToString(data.Latitude);
+                this.tbLongitude.Text         = LongitudeToString(data.Longitude);
+                this.tbAltitude.Text          = string.Format("{0:0. ft}", data.Altitude);
+                this.tbHeading.Text           = string.Format("{0:0. deg}", data.Heading);
+                this.tbAirspeed.Text          = string.Format("{0:0. knots}", data.Airspeed);
+                this.tbGroundspeed.Text       = string.Format("{0:0. knots}", data.Groundspeed);
+                this.tbTouchdownVelocity.Text = string.Format("{0:0. ft/min}", data.TouchdownVelocity * 60);
+
+                this.tsslSimulatorStatus.Text = "LON : " + this.tbLongitude.Text + " - LAT : " + this.tbLatitude.Text + " - ALT : " + this.tbAltitude.Text + " - HDG : " + this.tbHeading.Text + " - GS : " + this.tbGroundspeed.Text + " - XPDR: " + (data.TransponderCode ?? string.Empty);
+
+                // Skip transmission if one is already in flight to avoid overlapping requests
+                if (_isTransmitting) return;
+
+                _isTransmitting = true;
+                tsslCommunicationsStatus.Text = "Sending...";
+                try
+                {
+                    string status = await _httpTransmitter.TransmitAsync(data, tbNotes.Text, Application.ProductVersion).ConfigureAwait(true);
+                    // Ensure we marshal back to UI thread for UI updates (we're already on UI thread but be defensive)
+                    if (this.InvokeRequired)
+                    {
+                        this.Invoke(new Action(() => tsslCommunicationsStatus.Text = status));
+                        this.Invoke(new Action(() => tsslMain.Text = DateTime.Now.Subtract(ConnectionStartTime).ToString(@"hh\:mm\:ss")));
+                    }
+                    else
+                    {
+                        tsslCommunicationsStatus.Text = status;
+                        tsslMain.Text = DateTime.Now.Subtract(ConnectionStartTime).ToString(@"hh\:mm\:ss");
+                    }
+                }
+                finally
+                {
+                    _isTransmitting = false;
+                }
             }
-            finally
+            catch (Exception ex)
             {
-                _isTransmitting = false;
+                // Defensive: show error but do not allow exceptions to propagate into SimConnect internals
+                try { tsslCommunicationsStatus.Text = "Error: " + ex.Message; } catch { }
             }
         }
 

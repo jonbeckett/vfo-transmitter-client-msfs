@@ -69,23 +69,31 @@ namespace VirtualFlightOnlineTransmitter
         /// </summary>
         private string BuildUrl(PlaneData data, string notes, string version)
         {
-            return Properties.Settings.Default["ServerURL"].ToString()
-                + "?Callsign="          + WebUtility.UrlEncode(Properties.Settings.Default["Callsign"].ToString())
-                + "&PilotName="         + WebUtility.UrlEncode(Properties.Settings.Default["PilotName"].ToString())
-                + "&GroupName="         + WebUtility.UrlEncode(Properties.Settings.Default["GroupName"].ToString())
-                + "&MSFSServer="        + WebUtility.UrlEncode(Properties.Settings.Default["MSFSServer"].ToString())
-                + "&Pin="               + WebUtility.UrlEncode(Properties.Settings.Default["Pin"].ToString())
-                + "&AircraftType="      + WebUtility.UrlEncode(data.AircraftType)
-                + "&Latitude="          + data.Latitude.ToString(_usFormat)
-                + "&Longitude="         + data.Longitude.ToString(_usFormat)
-                + "&Altitude="          + data.Altitude.ToString(_usFormat)
-                + "&Airspeed="          + data.Airspeed.ToString(_usFormat)
-                + "&Groundspeed="       + data.Groundspeed.ToString(_usFormat)
-                + "&Heading="           + data.Heading.ToString(_usFormat)
-                + "&TouchdownVelocity=" + data.TouchdownVelocity.ToString(_usFormat)
-                + "&TransponderCode="   + WebUtility.UrlEncode(data.TransponderCode)
-                + "&Version="           + WebUtility.UrlEncode(version)
-                + "&Notes="             + WebUtility.UrlEncode(notes);
+            // Read settings defensively to avoid NullReferenceExceptions when a key is missing
+            string serverUrl = Properties.Settings.Default["ServerURL"]?.ToString() ?? string.Empty;
+            string callsign = Properties.Settings.Default["Callsign"]?.ToString() ?? string.Empty;
+            string pilotName = Properties.Settings.Default["PilotName"]?.ToString() ?? string.Empty;
+            string groupName = Properties.Settings.Default["GroupName"]?.ToString() ?? string.Empty;
+            string msfsServer = Properties.Settings.Default["MSFSServer"]?.ToString() ?? string.Empty;
+            string pin = Properties.Settings.Default["Pin"]?.ToString() ?? string.Empty;
+
+            return serverUrl
+                + "?Callsign="          + WebUtility.UrlEncode(callsign)
+                + "&PilotName="         + WebUtility.UrlEncode(pilotName)
+                + "&GroupName="         + WebUtility.UrlEncode(groupName)
+                + "&MSFSServer="        + WebUtility.UrlEncode(msfsServer)
+                + "&Pin="               + WebUtility.UrlEncode(pin)
+                + "&AircraftType="      + WebUtility.UrlEncode(data?.AircraftType ?? string.Empty)
+                + "&Latitude="          + (data?.Latitude.ToString(_usFormat) ?? "0")
+                + "&Longitude="         + (data?.Longitude.ToString(_usFormat) ?? "0")
+                + "&Altitude="          + (data?.Altitude.ToString(_usFormat) ?? "0")
+                + "&Airspeed="          + (data?.Airspeed.ToString(_usFormat) ?? "0")
+                + "&Groundspeed="       + (data?.Groundspeed.ToString(_usFormat) ?? "0")
+                + "&Heading="           + (data?.Heading.ToString(_usFormat) ?? "0")
+                + "&TouchdownVelocity=" + (data?.TouchdownVelocity.ToString(_usFormat) ?? "0")
+                + "&TransponderCode="   + WebUtility.UrlEncode(data?.TransponderCode ?? string.Empty)
+                + "&Version="           + WebUtility.UrlEncode(version ?? string.Empty)
+                + "&Notes="             + WebUtility.UrlEncode(notes ?? string.Empty);
         }
     }
 }

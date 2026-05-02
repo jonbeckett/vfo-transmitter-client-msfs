@@ -125,9 +125,28 @@ namespace VirtualFlightOnlineTransmitter
         {
             if (_simConnect != null)
             {
-                _simConnect.OnRecvSimobjectDataBytype -= OnRecvSimobjectDataBytype;
-                _simConnect.Dispose();
-                _simConnect = null;
+                try
+                {
+                    _simConnect.OnRecvSimobjectDataBytype -= OnRecvSimobjectDataBytype;
+                }
+                catch
+                {
+                    // ignore errors while removing event handler
+                }
+
+                try
+                {
+                    _simConnect.Dispose();
+                }
+                catch
+                {
+                    // Dispose can throw if the underlying connection is already in a bad state.
+                    // Swallow exceptions to avoid crashing the app during disconnect.
+                }
+                finally
+                {
+                    _simConnect = null;
+                }
             }
         }
 
