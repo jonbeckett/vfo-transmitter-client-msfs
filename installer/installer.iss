@@ -28,7 +28,8 @@ DisableProgramGroupPage=yes
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=commandline
 OutputDir={#SourcePath}
-OutputBaseFilename=transmitter_1.0.4.0
+; Use the application version macro to include the version in the installer filename
+OutputBaseFilename=transmitter_{#MyAppVersion}
 SetupIconFile={#SetupIconPath}
 Compression=lzma
 SolidCompression=yes
