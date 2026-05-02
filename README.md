@@ -1,5 +1,7 @@
 ﻿# VirtualFlight Online Transmitter (MSFS)
 
+VirtualFlight.Online Transmitter (MSFS) - Version 1.0.4
+
 A lightweight Windows Forms client that reads live aircraft data from Microsoft Flight Simulator via SimConnect and transmits periodic position updates to the VirtualFlight.Online transmitter service.
 
 ## Summary
@@ -64,6 +66,11 @@ Recent updates improve stability when the simulator shuts down unexpectedly or w
 These changes mean simulator shutdowns and temporary internet outages fail gracefully: the UI shows an error/status message and the app remains running so you can reconnect or investigate.
 
 Recommended next steps (optional): add minimal error logging (file or Event Log) for caught exceptions and consider a retry/backoff policy for transient HTTP failures.
+
+## Changelog
+
+- 1.0.4 — Improve robustness: guard SimConnect dispatch, safer disconnect, defensive HTTP URL building, defensive data handler, README updates (2026-05-02).
+- 1.0.3 — Previous release (assembly version reflected in earlier builds).
 
 ## Extending
 
