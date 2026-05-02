@@ -52,6 +52,19 @@ The application keeps the `servers` JSON array and mirrors the selected profile 
 - If the app reports it cannot connect to the simulator, ensure MSFS is running and that SimConnect is installed and matches the simulator version.
 - If HTTP transmissions fail, verify the `serverURL` and network connectivity. The UI shows a short status string for each transmit attempt (round-trip time on success or an error description).
 
+## Robustness improvements (recent)
+
+Recent updates improve stability when the simulator shuts down unexpectedly or when the network is unreliable. Key behaviours:
+
+- The application now guards SimConnect message dispatch so exceptions thrown by SimConnect (for example when MSFS exits) are caught and handled. The app attempts a clean disconnect and updates the UI instead of crashing.
+- Disconnect logic has been hardened to safely unsubscribe event handlers and dispose of the SimConnect client even if the underlying connection is already in a bad state.
+- HTTP URL construction is defensive against missing settings and null data fields to avoid runtime exceptions when building requests.
+- The data handler that updates the UI and triggers transmissions is more defensive: it guards against null data, ensures UI updates occur on the UI thread, and catches unexpected exceptions so they do not propagate into SimConnect's message dispatch.
+
+These changes mean simulator shutdowns and temporary internet outages fail gracefully: the UI shows an error/status message and the app remains running so you can reconnect or investigate.
+
+Recommended next steps (optional): add minimal error logging (file or Event Log) for caught exceptions and consider a retry/backoff policy for transient HTTP failures.
+
 ## Extending
 
 The code is intentionally small and focused. Useful extension points:
