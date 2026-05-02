@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Transmitter"
-#define MyAppVersion "1.0.3.0"
+#define MyAppVersion "1.0.4.0"
 #define MyAppPublisher "Jonathan Beckett"
 #define MyAppURL "https://virtualflight.online"
 #define MyAppExeName "Transmitter.exe"
@@ -28,7 +28,7 @@ DisableProgramGroupPage=yes
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=commandline
 OutputDir={#SourcePath}
-OutputBaseFilename=transmitter_installer
+OutputBaseFilename=transmitter_1.0.4.0
 SetupIconFile={#SetupIconPath}
 Compression=lzma
 SolidCompression=yes
