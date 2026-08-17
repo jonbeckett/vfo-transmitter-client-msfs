@@ -1,0 +1,22 @@
+title: VirtualFlight.Online Transmitter — User Guide
+description: >-
+  User guide for the VirtualFlight.Online Transmitter client for Microsoft Flight Simulator.
+theme: minima
+show_excerpts: false
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Top navigation bar links, in order (minima theme feature).
+header_pages:
+  - installation.md
+  - configuration.md
+  - using-the-transmitter.md
+  - troubleshooting.md
+  - changelog.md
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
